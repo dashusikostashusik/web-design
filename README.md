@@ -1,3 +1,1 @@
-# web-design
-1 лабораторная  
-[Обязанности кота](https://dashusikostashusik.github.io/web-design/first/cat/)  
+# web-design 
