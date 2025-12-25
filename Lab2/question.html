@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопросы по HTML</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e1e5e9;
+            overflow: hidden;
+        }
+
+        .question-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: background-color 0.2s;
+        }
+
+        .question-header:hover {
+            background: #f8f9fa;
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            flex: 1;
+            color: #2c3e50;
+        }
+
+        .toggle-icon {
+            color: #7f8c8d;
+            transition: transform 0.3s;
+        }
+
+        .answer-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .answer-content.active {
+            padding: 25px;
+            max-height: 2000px;
+        }
+
+        .answer-content.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .answer-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .answer-text p {
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e1e5e9;
+            color: #2c3e50;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 2px;
+        }
+
+        .highlight {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin: 15px 0;
+        }
+
+        .correct {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin: 15px 0;
+        }
+
+        .incorrect {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin: 15px 0;
+        }
+
+        .format-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .format-item {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #e1e5e9;
+        }
+
+        .format-item.correct {
+            border-color: #28a745;
+        }
+
+        .format-item.incorrect {
+            border-color: #dc3545;
+        }
+
+        .format-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .format-status {
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 0;
+            color: #7f8c8d;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .format-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-header {
+                padding: 15px;
+            }
+            
+            .answer-content.active {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Вопросы по HTML</h1>
+        <p class="subtitle">Основы веб-разработки</p>
+    </header>
+
+    <main>
+        <!-- Question 1 -->
+        <div class="question-card">
+            <div class="question-header" onclick="toggleAnswer(1)">
+                <div style="display: flex; align-items: center;">
+                    <span class="question-number">1</span>
+                    <span class="question-text">Структура базового HTML-документа и обязательные теги</span>
+                </div>
+                <i class="toggle-icon">▼</i>
+            </div>
+            <div class="answer-content" id="answer-1">
+                <div class="answer-text">
+                    <p>Базовый HTML-документ состоит из следующих обязательных тегов:</p>
+                    
+                    <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Заголовок страницы&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    Содержимое страницы
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+
+                    <p><span class="highlight">Обязательные элементы:</span></p>
+                    <ul>
+                        <li><span class="tag">&lt;!DOCTYPE html&gt;</span> - объявление типа документа</li>
+                        <li><span class="tag">&lt;html&gt;</span> - корневой элемент</li>
+                        <li><span class="tag">&lt;head&gt;</span> - секция с метаинформацией</li>
+                        <li><span class="tag">&lt;meta charset="UTF-8"&gt;</span> - указание кодировки</li>
+                        <li><span class="tag">&lt;title&gt;</span> - заголовок страницы</li>
+                        <li><span class="tag">&lt;body&gt;</span> - основное содержимое</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <div class="question-header" onclick="toggleAnswer(2)">
+                <div style="display: flex; align-items: center;">
+                    <span class="question-number">2</span>
+                    <span class="question-text">Какой формат изображений нельзя использовать на HTML-странице?</span>
+                </div>
+                <i class="toggle-icon">▼</i>
+            </div>
+            <div class="answer-content" id="answer-2">
+                <div class="answer-text">
+                    <p>Среди перечисленных форматов <span class="highlight">RAW нельзя использовать</span> для размещения на HTML-странице.</p>
+                    
+                    <div class="format-list">
+                        <div class="format-item correct">
+                            <div class="format-name">JPEG</div>
+                            <div class="format-status">Поддерживается</div>
+                        </div>
+                        <div class="format-item correct">
+                            <div class="format-name">PNG</div>
+                            <div class="format-status">Поддерживается</div>
+                        </div>
+                        <div class="format-item correct">
+                            <div class="format-name">GIF</div>
+                            <div class="format-status">Поддерживается</div>
+                        </div>
+                        <div class="format-item incorrect">
+                            <div class="format-name">RAW</div>
+                            <div class="format-status">Не поддерживается</div>
+                        </div>
+                        <div class="format-item correct">
+                            <div class="format-name">SVG</div>
+                            <div class="format-status">Поддерживается</div>
+                        </div>
+                        <div class="format-item correct">
+                            <div class="format-name">WEBP</div>
+                            <div class="format-status">Поддерживается</div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>Примечание:</strong> RAW - это "сырой" формат данных с камеры, который требует специальной обработки и не поддерживается браузерами для непосредственного отображения.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <div class="question-header" onclick="toggleAnswer(3)">
+                <div style="display: flex; align-items: center;">
+                    <span class="question-number">3</span>
+                    <span class="question-text">На какой версии HTML написана лабораторная работа №1?</span>
+                </div>
+                <i class="toggle-icon">▼</i>
+            </div>
+            <div class="answer-content" id="answer-3">
+                <div class="answer-text">
+                    <p>Лабораторная работа №1 выполнена на <span class="highlight">HTML5</span>.</p>
+                    
+                    <div class="correct">
+                        <p><strong>HTML5</strong> - это современная версия языка разметки, которая включает:</p>
+                        <ul>
+                            <li>Семантические теги (<span class="tag">&lt;header&gt;</span>, <span class="tag">&lt;footer&gt;</span>, <span class="tag">&lt;article&gt;</span>)</li>
+                            <li>Поддержка мультимедиа (<span class="tag">&lt;video&gt;</span>, <span class="tag">&lt;audio&gt;</span>)</li>
+                            <li>Улучшенная поддержка форм</li>
+                            <li>API для веб-приложений</li>
+                        </ul>
+                    </div>
+
+                    <p>Объявление <span class="tag">&lt;!DOCTYPE html&gt;</span> в начале документа указывает на использование HTML5.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <div class="question-header" onclick="toggleAnswer(4)">
+                <div style="display: flex; align-items: center;">
+                    <span class="question-number">4</span>
+                    <span class="question-text">Какой тег используется для вставки разрыва строки?</span>
+                </div>
+                <i class="toggle-icon">▼</i>
+            </div>
+            <div class="answer-content" id="answer-4">
+                <div class="answer-text">
+                    <p>Для вставки разрыва строки используется тег <span class="tag">&lt;br&gt;</span>.</p>
+                    
+                    <p><span class="highlight">Пример использования:</span></p>
+                    <div class="code-block">
+&lt;p&gt;Первая строка&lt;br&gt;Вторая строка&lt;/p&gt;
+                    </div>
+
+                    <p><span class="highlight">Результат:</span></p>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; border: 1px solid #e1e5e9;">
+                        Первая строка<br>Вторая строка
+                    </div>
+
+                    <div class="note">
+                        <strong>Рекомендация:</strong> Тег <span class="tag">&lt;br&gt;</span> следует использовать для смысловых переносов (стихи, адреса), а не для визуального оформления.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <div class="question-header" onclick="toggleAnswer(5)">
+                <div style="display: flex; align-items: center;">
+                    <span class="question-number">5</span>
+                    <span class="question-text">Доступность HTML-страницы в Интернете после создания</span>
+                </div>
+                <i class="toggle-icon">▼</i>
+            </div>
+            <div class="answer-content" id="answer-5">
+                <div class="answer-text">
+                    <p><span class="highlight">Нет</span>, другие пользователи Интернета не смогут найти страницу, созданную локально.</p>
+                    
+                    <div class="incorrect">
+                        <p><strong>Причина:</strong> Локальный файл имеет адрес вида <code>file:///C:/path/to/file.html</code>, который доступен только на вашем компьютере.</p>
+                    </div>
+
+                    <p><span class="highlight">Чтобы сделать страницу доступной в Интернете:</span></p>
+                    <ol>
+                        <li>Разместить файлы на веб-хостинге</li>
+                        <li>Зарегистрировать доменное имя</li>
+                        <li>Загрузить файлы на сервер</li>
+                    </ol>
+
+                    <div class="correct">
+                        <p><strong>Локальный адрес:</strong> <code>file:///C:/сайт/page.html</code></p>
+                        <p><strong>Интернет-адрес:</strong> <code>https://example.com/page.html</code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Вопросы и ответы по основам HTML</p>
+        <p>© 2023</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(questionNumber) {
+            const answer = document.getElementById(`answer-${questionNumber}`);
+            const isActive = answer.classList.contains('active');
+            
+            // Close all answers
+            document.querySelectorAll('.answer-content').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // If the clicked answer wasn't active, open it
+            if (!isActive) {
+                answer.classList.add('active');
+            }
+        }
+
+        // Initialize first question as open
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAnswer(1);
+        });
+    </script>
+</body>
+</html>

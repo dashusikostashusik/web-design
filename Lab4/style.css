@@ -1,0 +1,72 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: red;
+}
+
+p {
+  font-size: 16px;
+}
+
+.link {
+  color: green;
+}
+.special-link {
+  color: blue;
+}
+.post {
+  color: violet;
+}
+.widget {
+  color: pink;
+}
+.important-widget{
+  color:#800000;
+}
+.highlighted{
+  color: black;
+}
+
+#first-post p {
+  color: orange;
+}
+
+#first-post h2 {
+  color: orange;
+}
+
+input[placeholder="Белый"] {
+  background-color: white;
+  color: black;
+}
+
+.nav-list li:nth-child(3) a {
+  color: yellow;
+}
+.link:hover {
+  text-decoration: underline;
+}
+h3::before {
+  content: "→ ";
+  color: gray;
+}
+
+.color-list li {
+  color: gray;
+}
+.widget .color-list li:nth-child(2) {
+  color: brown;
+}
+
+h2 + p {
+  color: violet;
+}
+
+.highlighted {
+  color: black;
+}
+.submit-btn {
+  color: black;
+}

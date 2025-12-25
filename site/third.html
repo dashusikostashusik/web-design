@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Технологии | Дарья Осташевская</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #2E3A59;
+            --primary: #4A6FA5;
+            --accent: #E63946;
+            --light-bg: #F8F9FA;
+            --light-text: #FFFFFF;
+            --dark-text: #333333;
+            --gray-text: #666666;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--primary-dark);
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .back-button:hover {
+            color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h1 {
+            font-size: 2.8rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .technologies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .technology-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .technology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .tech-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .tech-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tech-content p {
+            color: var(--gray-text);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tech-level {
+            margin-bottom: 20px;
+        }
+
+        .level-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        .level-bar {
+            height: 8px;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .level-fill {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background-color: var(--light-bg);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .technology-stack {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .stack-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .stack-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .stack-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .stack-item:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 992px) {
+            .technologies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+
+            .section-title h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .technologies-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .section-title h1 {
+                font-size: 2rem;
+            }
+
+            .stack-items {
+                gap: 15px;
+            }
+
+            .stack-item {
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .section-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title p {
+                font-size: 1rem;
+            }
+
+            .tech-header,
+            .tech-content {
+                padding: 20px;
+            }
+
+            .technology-stack {
+                padding: 30px 20px;
+            }
+
+            .stack-items {
+                gap: 10px;
+            }
+
+            .stack-item {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Назад к визитке
+        </a>
+
+        <div class="section-title">
+            <h1>Технологии, которыми я владею</h1>
+            <p>Профессиональные инструменты и методологии для эффективного бизнес-анализа</p>
+        </div>
+
+        <div class="technologies-grid">
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>BPMN 2.0</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Моделирование бизнес-процессов с использованием нотации BPMN 2.0. Создание понятных и
+                        детализированных диаграмм процессов для оптимизации и автоматизации.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="90"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Bizagi</span>
+                        <span class="tech-tag">Visio</span>
+                        <span class="tech-tag">Lucidchart</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>UML</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Разработка диаграмм UML для визуализации структуры систем, их поведения и взаимодействия.
+                        Использую Use Case, Class, Sequence и Activity диаграммы.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="85"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Enterprise Architect</span>
+                        <span class="tech-tag">PlantUML</span>
+                        <span class="tech-tag">Draw.io</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Agile & Scrum</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Работа в Agile-среде с использованием методологии Scrum. Участие в планировании спринтов,
+                        создание user stories, проведение daily stand-ups и ретроспектив.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="95"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Jira</span>
+                        <span class="tech-tag">Trello</span>
+                        <span class="tech-tag">Confluence</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>SQL & Анализ данных</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Написание SQL-запросов для извлечения и анализа данных. Работа с базами данных для выявления
+                        закономерностей и получения бизнес-инсайтов.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="80"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Excel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Техническая документация</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Создание и поддержка технической документации: требования, спецификации, руководства
+                        пользователя. Обеспечение понятности и полноты документации.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="90"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Confluence</span>
+                        <span class="tech-tag">Markdown</span>
+                        <span class="tech-tag">Google Docs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <div class="tech-header">
+                    <div class="tech-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>BI инструменты</h3>
+                </div>
+                <div class="tech-content">
+                    <p>Работа с инструментами бизнес-аналитики для создания отчетов и дашбордов. Визуализация данных для
+                        принятия управленческих решений.</p>
+                    <div class="tech-level">
+                        <div class="level-label">
+                            <span>Уровень владения:</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="level-bar">
+                            <div class="level-fill" data-level="75"></div>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Tableau</span>
+                        <span class="tech-tag">Power BI</span>
+                        <span class="tech-tag">Google Data Studio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="technology-stack">
+            <h3 class="stack-title">Дополнительные инструменты и навыки</h3>
+            <div class="stack-items">
+                <div class="stack-item">
+                    <i class="fas fa-users"></i>
+                    <span>Фасилитация встреч</span>
+                </div>
+                <div class="stack-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Работа с заказчиком</span>
+                </div>
+                <div class="stack-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Решение проблем</span>
+                </div>
+                <div class="stack-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Системное мышление</span>
+                </div>
+                <div class="stack-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Управление ожиданиями</span>
+                </div>
+                <div class="stack-item">
+                    <i class="fas fa-language"></i>
+                    <span>Технический английский</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.technology-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+
+            setTimeout(() => {
+                const levelFills = document.querySelectorAll('.level-fill');
+                levelFills.forEach(fill => {
+                    const level = fill.getAttribute('data-level');
+                    fill.style.width = level + '%';
+                });
+            }, 500);
+
+            const stackItems = document.querySelectorAll('.stack-item');
+            stackItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 300 + (index * 50));
+            });
+        });
+    </script>
+</body>
+
+</html>
